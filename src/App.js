@@ -3,11 +3,13 @@ import "./App.css";
 import axios from "axios";
 import { Notes } from "./components/Notes";
 import noteService from "./services/notes";
+import { Notification } from "./components/Notification";
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("");
   const [showAll, setShowAll] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("some error happened");
 
   useEffect(() => {
     noteService.getAll().then((initialNotes) => {
@@ -56,6 +58,7 @@ function App() {
   return (
     <div>
       <h1>Notes</h1>
+      <Notification />
       <ul>
         {notesToShow.map((note, i) => (
           <Notes
